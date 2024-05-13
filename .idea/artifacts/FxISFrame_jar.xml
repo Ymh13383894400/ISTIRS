@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FxISFrame:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FxISFrame_jar</output-path>
+    <root id="archive" name="FxISFrame.jar">
+      <element id="module-output" name="FxISFrame" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gesturefx-0.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/xmpcore-5.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jfoenix-8.0.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gson-2.8.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/metadata-extractor-2.8.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/sqlite-jdbc-3.23.1.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/bin" />
+    </root>
+  </artifact>
+</component>

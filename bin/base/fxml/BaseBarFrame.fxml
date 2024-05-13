@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.String?>
+<?import views.MyToolTip?>
+
+<BorderPane
+	style="-fx-background:transparent;-fx-padding: 10;" fx:id="root"
+	opacity="0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="base.controller.BaseBarController">
+	<center>
+		<BorderPane BorderPane.alignment="CENTER">
+			<styleClass>
+				<String fx:value="frame-pane" />
+			</styleClass>
+			<effect>
+				<DropShadow />
+			</effect>
+			<top>
+				<HBox fx:id="bar" alignment="CENTER"
+					BorderPane.alignment="CENTER">
+					<styleClass>
+						<String fx:value="bar-main" />
+					</styleClass>
+					<children>
+						<Label fx:id="bar_title" maxWidth="Infinity"
+							text="%software_title"
+							style="-fx-font-weight: normal; -fx-font-size:20;"
+							graphicTextGap="8" HBox.hgrow="ALWAYS">
+							<graphic>
+								<ImageView fx:id="img_icon" fitWidth="30.0"
+									preserveRatio="true" smooth="true">
+									<image>
+										<Image url="/resources/software_icon_small.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</Label>
+						<JFXButton fx:id="btn_help" onAction="#onClickHelp"
+							style="-fx-padding: 4;-fx-pref-width:26 ;-fx-focus-color: transparent;"
+							visible ="false">
+							<tooltip>
+								<MyToolTip text="%createProject_help"></MyToolTip>
+							</tooltip>
+							<graphic>
+								<ImageView fx:id="img_help" fitWidth="24.0"
+									preserveRatio="true" smooth="true">
+									<image>
+										<Image url="/resources/help2.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="btn_history" onAction="#onClickHistory"
+							style="-fx-padding: 4;-fx-pref-width:26 ;-fx-focus-color: transparent;">
+							<tooltip>
+								<MyToolTip text="%history"></MyToolTip>
+							</tooltip>
+							<graphic>
+								<ImageView fx:id="img_history" fitWidth="24.0"
+									preserveRatio="true" smooth="true">
+									<image>
+										<Image url="/resources/history.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="btn_hide" onAction="#onClickHide"
+							style="-fx-padding: 4;-fx-pref-width:26 ;-fx-focus-color: transparent;">
+							<tooltip>
+								<MyToolTip text="%minimize"></MyToolTip>
+							</tooltip>
+							<graphic>
+								<ImageView fx:id="img_hide" fitWidth="24.0"
+									preserveRatio="true" smooth="true">
+									<image>
+										<Image url="/resources/min.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="btn_close" onAction="#onClickClose"
+							style="-fx-padding: 4;-fx-pref-width:26 ；-fx-focus-color: transparent;">
+							<tooltip>
+								<MyToolTip text="%exit"></MyToolTip>
+							</tooltip>
+							<graphic>
+								<ImageView fitWidth="24.0" preserveRatio="true"
+									smooth="true">
+									<image>
+										<Image url="/resources/close.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+					</children>
+				</HBox>
+			</top>
+		</BorderPane>
+	</center>
+</BorderPane>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import views.myTextField.DecimalField?>
+<?import views.myTextField.IntegerField?>
+<?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import views.MyToolTip?>
+
+<?import com.jfoenix.validation.ValidationFacade?>
+<BorderPane fx:id="root"
+			style="-fx-background-color:#fff;-fx-padding:4"
+			xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="application.control.SettingController">
+		<center>
+			<BorderPane>
+				<left>
+					<VBox spacing="3.0" prefWidth="180.0"
+						  style="-fx-background-color: #fff; -fx-border-width: 1; -fx-border-color: #f1f1f1;"
+						  BorderPane.alignment="CENTER">
+						<Label text="%project"
+							   style="-fx-text-fill: #4f4f4f;-fx-font-size: 16.0">
+							<HBox.margin>
+								<Insets top="3.5" left="2" />
+							</HBox.margin>
+						</Label>
+
+						<ListView fx:id="listView_projects"
+								  style="-fx-background-color: #fff;-fx-padding:2;" />
+					</VBox>
+				</left>
+				<center>
+					<BorderPane>
+						<top>
+							<VBox spacing="5.0" alignment="TOP_LEFT" fx:id="setting_top_pane"
+								  style="-fx-background-color: #fff; -fx-border-width: 1; -fx-border-color: #f1f1f1;">
+								<Label fx:id="label_project_name"
+									   style="-fx-text-fill: #4f4f4f;-fx-font-size: 20.0">
+									<VBox.margin>
+										<Insets left="10.0" top="10.0" bottom="10.0"/>
+									</VBox.margin>
+								</Label>
+								<!--		添加更改算法的选择		-->
+								<JFXCheckBox fx:id="checkBox_ChangeAlgorithm" selected="false" alignment="TOP_LEFT"
+											 text="%setting_change_algorithm">
+									<styleClass>
+										<String fx:value="custom-jfx-check-box" />
+									</styleClass>
+									<VBox.margin>
+										<Insets left="10.0" top="10.0" bottom="10.0"/>
+									</VBox.margin>
+								</JFXCheckBox>
+
+								<BorderPane.margin>
+									<Insets left="5.0" top="5.0"/>
+								</BorderPane.margin>
+							</VBox>
+
+						</top>
+						<center>
+							<BorderPane>
+								<center>
+									<VBox spacing="12.0" fx:id="setting_pane" visible="false"
+										  style="-fx-background-color: #fff; -fx-border-width: 2; -fx-border-color: #fafafa;-fx-padding: 14;"
+										  BorderPane.alignment="CENTER">
+										<children>
+											<Label text="%setting_title" style="-fx-font-size: 18.0">
+												<styleClass>
+													<String fx:value="label-level-setting-normal" />
+												</styleClass>
+
+<!--												<HBox.margin>-->
+<!--													<Insets top="3.5" />-->
+<!--												</HBox.margin>-->
+											</Label>
+											<HBox spacing="14.0" fx:id="HBox_image_grid">
+												<children>
+													<Label text="%setting_net">
+														<styleClass>
+															<String fx:value="label-level-setting-normal" />
+														</styleClass>
+														<HBox.margin>
+															<Insets top="3.5" />
+														</HBox.margin>
+													</Label>
+													<VBox spacing="10.0">
+														<children>
+															<HBox alignment="CENTER_LEFT" prefHeight="15.0">
+																<children>
+																	<Label text="%setting_net_width">
+																		<styleClass>
+																			<String fx:value="label-level-setting-normal" />
+																		</styleClass>
+																	</Label>
+																	<IntegerField fx:id="textArea_width"
+																				  prefWidth="80" maxWidth="-1" prefColumnCount="10"
+																				  prefHeight="10.0">
+																		<styleClass>
+																			<String fx:value="custom-text-field" />
+																		</styleClass>
+																	</IntegerField>
+																</children>
+															</HBox>
+															<HBox alignment="CENTER_LEFT" prefHeight="15.0">
+																<children>
+																	<Label text="%setting_net_hight">
+																		<styleClass>
+																			<String fx:value="label-level-setting-normal" />
+																		</styleClass>
+																	</Label>
+																	<IntegerField fx:id="textArea_hight"
+																				  prefWidth="80" prefColumnCount="10" prefHeight="10">
+																		<styleClass>
+																			<String fx:value="custom-text-field" />
+																		</styleClass>
+																	</IntegerField>
+																</children>
+															</HBox>
+														</children>
+													</VBox>
+												</children>
+											</HBox>
+											<VBox spacing="15">
+												<HBox alignment="CENTER_LEFT"
+													  prefHeight="60.0" spacing="5.0">
+													<JFXCheckBox fx:id="checkBox_preCheck" selected="false"
+																 text="%setting_pre_check">
+														<styleClass>
+															<String fx:value="custom-jfx-check-box" />
+														</styleClass>
+													</JFXCheckBox>
+													<JFXButton fx:id="button_help" buttonType="RAISED" onAction="#onClickHelpCamera">
+														<graphic>
+															<ImageView fitHeight="25.0" fitWidth="25.0"
+																	   pickOnBounds="true" preserveRatio="true">
+																<image>
+																	<Image url="/resources/help_dark.png" />
+																</image>
+															</ImageView>
+														</graphic>
+													</JFXButton>
+												</HBox>
+												<VBox spacing="5" fx:id="Vbox_prechecks" disable="true">
+													<HBox fx:id="hbox_preCheckDetail1" alignment="CENTER_LEFT"
+														  prefHeight="10.0" spacing="4.0">
+														<children>
+															<JFXRadioButton text="" selected="true"
+																			selectedColor="#FFA500" fx:id="radioButton_way1"
+																			style="-fx-text-fill: #4f4f4f; -fx-font-size: 14;-fx-spacing:4">
+															</JFXRadioButton>
+															<HBox spacing="2.0" fx:id="hbox_way1"
+																  alignment="CENTER_LEFT">
+																<Label text="%setting_flight_height"  >
+																	<styleClass>
+																		<String fx:value="label-level-setting-normal" />
+																	</styleClass>
+																</Label>
+																<DecimalField fx:id="textArea_flyHeight"
+																			  prefWidth="50" prefHeight="10.0">
+																	<styleClass>
+																		<String fx:value="custom-text-field" />
+																	</styleClass>
+																</DecimalField>
+																<Label text="%setting_camera_size">
+																	<styleClass>
+																		<String fx:value="label-level-setting-normal" />
+																	</styleClass>
+																</Label>
+																<DecimalField fx:id="textArea_cameraSize"
+																			  prefWidth="50" prefHeight="10.0">
+																	<styleClass>
+																		<String fx:value="custom-text-field" />
+																	</styleClass>
+																</DecimalField>
+															</HBox>
+														</children>
+														<VBox.margin>
+															<Insets left="10" />
+														</VBox.margin>
+													</HBox>
+
+													<HBox fx:id="hbox_preCheckDetail2" alignment="CENTER_LEFT"
+														  prefHeight="10.0" spacing="4.0">
+														<children>
+															<JFXRadioButton text="" selectedColor="#FFA500"
+																			fx:id="radioButton_way2"
+																			style="-fx-text-fill: #4f4f4f; -fx-font-size: 14;-fx-spacing:4">
+															</JFXRadioButton>
+															<HBox spacing="6.0" fx:id="hbox_way2" disable="true"
+																  alignment="CENTER_LEFT">
+																<Label text="%setting_gsd">
+																	<styleClass>
+																		<String fx:value="label-level-setting-normal" />
+																	</styleClass>
+																</Label>
+																<DecimalField fx:id="textArea_gsd" prefWidth="80"
+																			  prefHeight="10.0">
+																	<styleClass>
+																		<String fx:value="custom-text-field" />
+																	</styleClass>
+																</DecimalField>
+															</HBox>
+														</children>
+														<VBox.margin>
+															<Insets left="10" />
+														</VBox.margin>
+													</HBox>
+												</VBox>
+											</VBox>
+											<JFXCheckBox fx:id="checkBox_SaveMiddle"
+														 selected="false" text="%setting_save_middle">
+												<styleClass>
+													<String fx:value="custom-jfx-check-box" />
+												</styleClass>
+											</JFXCheckBox>
+
+											<JFXButton fx:id="button_save" onAction="#onSaveSetting" text="%setting_save" >
+												<styleClass>
+													<String fx:value="btn-level-normal" />
+												</styleClass>
+												<VBox.margin>
+													<Insets top="10"></Insets>
+												</VBox.margin>
+											</JFXButton>
+
+										</children>
+										<BorderPane.margin>
+											<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+										</BorderPane.margin>
+									</VBox>
+								</center>
+								<right>
+									<VBox spacing="5.0" alignment="CENTER" fx:id="setting_right_pane"
+										  style="-fx-background-color: #fff; -fx-border-width: 1; -fx-border-color: #f1f1f1;">
+										<JFXButton onAction="#onAddSetting" text="%settings_add">
+											<styleClass>
+												<String fx:value="btn-level-normal" />
+											</styleClass>
+										</JFXButton>
+										<Label text="%listview_setting_tips"
+											   style="-fx-text-fill: #6f6f6f;-fx-font-size: 12.0">
+										</Label>
+										<ListView fx:id="listView_settings"
+												  style="-fx-background-color: #fff;-fx-padding:2;" prefWidth="160.0" />
+										<BorderPane.margin>
+											<Insets right="5.0" />
+										</BorderPane.margin>
+									</VBox>
+								</right>
+							</BorderPane>
+						</center>
+					</BorderPane>
+				</center>
+			</BorderPane>
+		</center>
+
+</BorderPane>

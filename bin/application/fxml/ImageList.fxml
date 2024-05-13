@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableView?>
+<?import views.MyToolTip?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
+
+<BorderPane fx:id="root1" style="-fx-background-color:#fff"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.control.ImageListController">
+	<center>
+		<VBox BorderPane.alignment="CENTER" style="-fx-padding: 5;">
+			<children>
+				<TableView fx:id="tableView"
+					style="-fx-background-color: #fff; -fx-border-width: 2; -fx-border-color: #fafafa;">
+				</TableView>
+				<HBox alignment="CENTER_LEFT" style="-fx-spacing: 10;">
+					<children>
+						<Label fx:id="bottomLabel_all" text="" textFill="#4f4f4f"
+							style="-fx-font-size:14.0;">
+						</Label>
+						<Label fx:id="bottomLabel_deleted" text=""
+							textFill="#4f4f4f" style="-fx-font-size:14.0;">
+						</Label>
+						<Label fx:id="bottomLabel_selected" text=""
+							textFill="#4f4f4f" style="-fx-font-size:14.0;">
+						</Label>
+					</children>
+				</HBox>
+			</children>
+			<BorderPane.margin>
+				<Insets left="10.0" top="10.0" />
+			</BorderPane.margin>
+		</VBox>
+	</center>
+	<right>
+		<VBox alignment="TOP_CENTER" prefHeight="175.0" prefWidth="140.0"
+			style="-fx-spacing: 10; -fx-padding: 10;"
+			BorderPane.alignment="CENTER">
+			<children>
+				<VBox fx:id="vbox_rightButtons" disable="true"
+					alignment="TOP_CENTER" style="-fx-spacing: 10; "
+					BorderPane.alignment="CENTER">
+					<JFXButton onAction="#onDeleteImg" fx:id="btn_delete"
+						text="%imageList_remove_image">
+						<styleClass>
+							<String fx:value="btn-level-projects" />
+						</styleClass>
+					</JFXButton>
+					<JFXButton onAction="#onRecallImg"
+						text="%imageList_recall_image">
+						<styleClass>
+							<String fx:value="btn-level-projects" />
+						</styleClass>
+					</JFXButton>
+					<JFXButton onAction="#onSeeImg"
+						text="%imageList_see_image">
+						<styleClass>
+							<String fx:value="btn-level-projects" />
+						</styleClass>
+					</JFXButton>
+				</VBox>
+				<JFXButton onAction="#onSeeLine" text="%imageList_flight">
+					<styleClass>
+						<String fx:value="btn-level-projects" />
+					</styleClass>
+				</JFXButton>
+				<ImageView fx:id="imageview" fitHeight="100.0"
+					fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+			</children>
+		</VBox>
+	</right>
+	<bottom>
+		<VBox prefWidth="340.0" style="-fx-padding: 10;"
+			BorderPane.alignment="CENTER">
+			<children>
+				<HBox alignment="CENTER_LEFT" prefHeight="25.0" spacing="8.0">
+					<children>
+						<Label style="-fx-text-fill: #000; -fx-font-size: 12;"
+							text="%project_name" wrapText="true" />
+						<JFXTextField fx:id="textField_projectName"
+							focusColor="#FFA500" unFocusColor="#fafafa00" labelFloat="true"
+							prefColumnCount="10" prefHeight="25.0" prefWidth="280.0"
+							maxWidth="-1"
+							style="-fx-font-size: 12;-fx-text-fill: #000; -fx-border-color:#fafafa;-fx-border-width:2;-fx-border-style:solid;        -fx-font-size: 14; -fx-padding:4;" />
+					</children>
+				</HBox>
+				<HBox alignment="CENTER_LEFT" prefHeight="35.0" spacing="5.0">
+					<children>
+						<Label style="-fx-text-fill: #000; -fx-font-size: 12;"
+							text="%project_location_way" wrapText="true" />
+						<JFXRadioButton fx:id="radioButton_img"
+							selected="true" selectedColor="#FFA500"
+							style="-fx-text-fill: #000; -fx-font-size: 12;-fx-spacing:4"
+							text="%project_location_way_img">
+						</JFXRadioButton>
+						<JFXRadioButton fx:id="radioButton_file"
+							selected="false" selectedColor="#FFA500"
+							style="-fx-text-fill: #000; -fx-font-size: 12;"
+							text="%project_location_way_file" />
+					</children>
+				</HBox>
+
+				<HBox fx:id="hbox_location" alignment="CENTER_LEFT"
+					disable="true" prefHeight="25.0" spacing="5.0">
+					<children>
+						<Label style="-fx-text-fill: #000; -fx-font-size: 12;"
+							text="%project_location_path" wrapText="true" />
+						<Label fx:id="labelLocation" maxWidth="-Infinity"
+							prefWidth="300"
+							style="-fx-text-fill: #000;-fx-font-size: 12;-fx-border-color:#fafafa;-fx-border-width:2;-fx-border-style:solid;"
+							HBox.hgrow="ALWAYS" />
+						<JFXButton buttonType="RAISED"
+							style="-fx-padding: 2;-fx-pref-width:15;-fx-pref-height:15"
+							onAction="#onClickSelectLocation">
+							<tooltip>
+								<MyToolTip text="%choose_location_file"></MyToolTip>
+							</tooltip>
+							<graphic>
+								<ImageView fitHeight="20" fitWidth="20"
+									preserveRatio="true">
+									<image>
+										<Image url="/resources/ellipsis.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton buttonType="RAISED" onAction="#onClickHelp"
+							style="-fx-padding: 2;-fx-pref-width:15;-fx-pref-height:15">
+							<tooltip>
+								<MyToolTip text="%help"></MyToolTip>
+							</tooltip>
+							<graphic>
+								<ImageView fitHeight="20" fitWidth="20"
+									preserveRatio="true">
+									<image>
+										<Image url="/resources/help_dark.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+					</children>
+				</HBox>
+			</children>
+		</VBox>
+	</bottom>
+</BorderPane>

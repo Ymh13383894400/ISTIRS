@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import net.kurobako.gesturefx.GesturePane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import java.lang.String?>
+<?import views.MyToolTip?>
+
+<BorderPane fx:id="root"
+	style="-fx-background-color:#EAEAEA;"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.control.GoogleMapFlightLineController">
+	<center>
+
+		<GesturePane fx:id="largePane">
+			<AnchorPane fx:id="pane" opacity="0"
+				style="-fx-border-color:#fafafa;-fx-border-width:2;-fx-border-style:solid;-fx-padding:5"
+				BorderPane.alignment="CENTER">
+				<children>
+					<GesturePane fx:id="gesturePane" visible="false"
+						AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+						AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<ImageView fx:id="imageView" pickOnBounds="true"
+							style="-fx-background-color:#fff" preserveRatio="true"
+							fitHeight="626" fitWidth="976" />
+					</GesturePane>
+
+					<HBox alignment="CENTER_LEFT" style="-fx-spacing: 10;"
+						AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+						<children>
+							<Label fx:id="bottomLabel_all" text="" textFill="#4f4f4f"
+								style="-fx-font-size:14.0;">
+							</Label>
+							<Label fx:id="bottomLabel_deleted" text=""
+								textFill="#4f4f4f" style="-fx-font-size:14.0;">
+							</Label>
+							<Label fx:id="bottomLabel_selected" text=""
+								textFill="#4f4f4f" style="-fx-font-size:14.0;">
+							</Label>
+							<Label fx:id="bottomLabel_current" text=""
+								textFill="#2564FD" style="-fx-font-size:14.0;">
+							</Label>
+						</children>
+					</HBox>
+
+					<Label fx:id="textArea_tip" prefWidth="160" wrapText="true"
+						AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" visible="true"
+						style="-fx-font-size:12;-fx-padding:3;-fx-text-fill: #4f4f4f;">
+					</Label>
+
+
+					<Label fx:id="textArea_place" wrapText="true"
+						AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0"
+						visible="false" style="-fx-font-size:13;-fx-text-fill: #4f4f4f;">
+					</Label>
+
+					<VBox 
+						fx:id="vbox_tip"
+						AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="30"
+						>
+						<children>
+							<Label text="%point_normal_tip"
+								style="-fx-font-size:12;-fx-text-fill: #4f4f4f;"
+								>
+								<graphic>
+									<ImageView fx:id="img_icon" fitWidth="20.0"
+										preserveRatio="true" smooth="true">
+										<image>
+											<Image url="/resources/camera-fill-normal.png" />
+										</image>
+									</ImageView>
+								</graphic>
+							</Label>
+							<Label text="%point_hover_tip"
+								style="-fx-font-size:12;-fx-text-fill: #4f4f4f;"
+								>
+								<graphic>
+									<ImageView fx:id="img_icon" fitWidth="20.0"
+										preserveRatio="true" smooth="true">
+										<image>
+											<Image url="/resources/camera-hover4.png" />
+										</image>
+									</ImageView>
+								</graphic>
+							</Label>
+							<Label text="%point_selected_tip"
+								style="-fx-font-size:12;-fx-text-fill: #4f4f4f;"
+								>
+								<graphic>
+									<ImageView fx:id="img_icon" fitWidth="20.0"
+										preserveRatio="true" smooth="true">
+										<image>
+											<Image url="/resources/camera-fill-focus.png" />
+										</image>
+									</ImageView>
+								</graphic>
+							</Label>
+							<Label text="%point_deleted_tip"
+								style="-fx-font-size:12;-fx-text-fill: #4f4f4f;"
+								>
+								<graphic>
+									<ImageView fx:id="img_icon" fitWidth="20.0"
+										preserveRatio="true" smooth="true">
+										<image>
+											<Image url="/resources/camera-fill-deleted.png" />
+										</image>
+									</ImageView>
+								</graphic>
+							</Label>
+						</children>
+					</VBox>
+
+					<Pane fx:id="gesturePaneFlight" AnchorPane.bottomAnchor="0.0"
+						prefHeight="450" prefWidth="450" AnchorPane.leftAnchor="0.0">
+						<Pane fx:id="pane_Canvas" prefHeight="450" prefWidth="450" />
+					</Pane>
+					
+					
+					
+					<JFXButton onAction="#onClickPaneSwitch" visible="true"
+						AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0"
+						style="-fx-padding:2;-fx-pref-width:20; -fx-focus-color:transparent;">
+						<tooltip>
+							<MyToolTip text="%flight_switcher_pane"></MyToolTip>
+						</tooltip>
+						<graphic>
+							<ImageView fx:id="btn_switch" fitWidth="20.0"
+								preserveRatio="true" smooth="true">
+								<image>
+									<Image url="/resources/eye_close.png" />
+								</image>
+							</ImageView>
+						</graphic>
+					</JFXButton>
+				</children>
+			</AnchorPane>
+		</GesturePane>
+	</center>
+</BorderPane>

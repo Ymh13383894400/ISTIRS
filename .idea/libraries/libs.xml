@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/gesturefx-0.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/xmpcore-5.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jfoenix-8.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/gson-2.8.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/metadata-extractor-2.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/sqlite-jdbc-3.23.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

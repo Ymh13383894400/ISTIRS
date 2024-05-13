@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.String?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import views.MyToolTip?>
+<!-- 主框架界面 -->
+
+<BorderPane fx:id="root" style="-fx-background-color: #aaa;"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.control.MainController">
+	<center>
+		<Pagination fx:id="mPagination"
+			BorderPane.alignment="CENTER">
+			<effect>
+				<InnerShadow radius="2" />
+			</effect>
+		</Pagination>
+	</center>
+	<bottom>
+		<StackPane prefHeight="30.0" BorderPane.alignment="CENTER">
+			<children>
+				<BorderPane fx:id="bottomGroupPane"  
+					style="-fx-background-color:linear-gradient(to right, #adadad 0.0%,#bdbdbd 40.0%,#bdbdbd 70.0%, #b4b4b4 100.0%);-fx-padding: 10;"
+					prefHeight="30.0" prefWidth="200.0">
+					<right>
+						<Label fx:id="label_team" text="%team"
+							BorderPane.alignment="CENTER"
+							style="-fx-text-fill: #2f2f2f; -fx-font-size:14; ">
+							
+							<BorderPane.margin>
+								<Insets right="8.0" />
+							</BorderPane.margin>
+						</Label>
+					</right>
+					<left>
+						<Label BorderPane.alignment="CENTER">
+							<effect>
+								<DropShadow color="#5A5A5A" radius="0.2" />
+							</effect>
+							<graphic>
+								<ImageView fitWidth="200"  pickOnBounds="true"
+									preserveRatio="true" smooth="true">
+									<image>
+										<Image url="/resources/school_logo_text.png" />
+									</image>
+								</ImageView>
+							</graphic>
+							<BorderPane.margin>
+								<Insets left="5.0" />
+							</BorderPane.margin>
+						</Label>
+					</left>
+				</BorderPane>
+			</children>
+			<children>
+				<BorderPane prefHeight="30.0" fx:id="bottomBtnsPane"
+					style="-fx-background-color: #FAFAFA;-fx-padding: 15;"
+					BorderPane.alignment="CENTER">
+					
+					<left>
+						<JFXButton fx:id="btn_pre" buttonType="RAISED"
+							onAction="#leftBtn" text="%pre_step"
+							prefWidth="120.0"
+							BorderPane.alignment="CENTER">
+							<graphic>
+								<ImageView fitHeight="16.0" fitWidth="16.0"
+									pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="/resources/arrow-left.png" />
+									</image>
+								</ImageView>
+							</graphic>
+							<styleClass>
+								<String fx:value="btn-level-vip" />
+							</styleClass>
+						</JFXButton>
+					</left>
+					<right>
+						<HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER" spacing="5.0">
+							<JFXButton fx:id="button_notice" buttonType="RAISED" AnchorPane.rightAnchor="5.0" AnchorPane.bottomAnchor="5.0"	style="-fx-padding:2"
+									onAction="#onClickNoticeSize">
+									<tooltip>
+										<MyToolTip text="%tips"></MyToolTip>
+									</tooltip>
+								<graphic>
+									<ImageView fitHeight="25.0" fitWidth="25.0"
+									pickOnBounds="true" preserveRatio="true" smooth="true">
+									<image>
+										<Image url="/resources/prompt.png" />
+									</image>
+									</ImageView>
+								</graphic>
+							</JFXButton>
+							 <JFXButton fx:id="btn_next" buttonType="RAISED"
+								prefWidth="120.0"
+								onAction="#rightBtn" text="%next_step"
+							 	>
+								<styleClass>
+									<String fx:value="btn-level-vip" />
+								</styleClass>
+							</JFXButton>
+						</HBox>
+					</right>
+				</BorderPane>
+			</children>
+		</StackPane>
+	</bottom>
+</BorderPane>
