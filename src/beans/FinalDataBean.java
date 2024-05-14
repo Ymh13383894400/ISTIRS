@@ -12,6 +12,7 @@ public class FinalDataBean {
 	private ObservableList<ProjectBean> projectListData;
 	private SettingsBean settings;
 	public static String para_Exe;
+	public static int para_Exe_type;
 
 	public FinalDataBean(ObservableList<ProjectBean> projectListData, SettingsBean settings) {
 		super();

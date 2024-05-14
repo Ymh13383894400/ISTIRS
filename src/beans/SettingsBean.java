@@ -42,12 +42,6 @@ public class SettingsBean implements Serializable {
 		this.AlgorithmType = AlgorithmType;
 	}
 
-	public boolean isChangeAlgorithm(){
-		if(AlgorithmType == 1) return true;
-		else return false;
-	}
-
-
 	public SettingsBean() {
 		this.id = System.currentTimeMillis();
 		this.setLastUsedTime(this.id);

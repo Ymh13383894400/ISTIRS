@@ -55,8 +55,8 @@ public class SettingController extends BaseController implements Initializable {
 	@FXML
 	JFXCheckBox checkBox_preCheck;
 	//添加更改算法的checkbox
-	@FXML
-	JFXCheckBox checkBox_ChangeAlgorithm;
+//	@FXML
+//	JFXCheckBox checkBox_ChangeAlgorithm;
 	@FXML
 	IntegerField textArea_width;
 	@FXML
@@ -80,6 +80,16 @@ public class SettingController extends BaseController implements Initializable {
 	@FXML
 	private HBox hbox_way2;
 
+	@FXML
+	private JFXRadioButton radioButton_algorithmWay1;
+	@FXML
+	private JFXRadioButton radioButton_algorithmWay2;
+	@FXML
+	private HBox hbox_algorithmWay1;
+	@FXML
+	private HBox hbox_algorithmWay2;
+
+
 	//-------------设置HBox_image_grid，隐藏最上面的参数设置-------------
 	@FXML
 	HBox HBox_image_grid;
@@ -96,6 +106,7 @@ public class SettingController extends BaseController implements Initializable {
 	Button button_help;
 
 	private ToggleGroup group;
+	private ToggleGroup groupAlgorithm;
 
 	private ObservableList<ProjectBean> projectListData;
 	private ObservableList<SettingsBean> settingListData = FXCollections.observableArrayList();
@@ -118,7 +129,7 @@ public class SettingController extends BaseController implements Initializable {
 
 	ImageView imageView = new ImageView(new Image("/resources/wushuju.png"));
 
-	private int AlgorithmType = 0;//0:默认算法-带参数算法，1:NISwGSP-不带参数算法
+	private int AlgorithmType = 1;//0:默认算法-带参数算法，1:NISwGSP-不带参数算法
 
 	public int getAlgorithmType(){
 		return AlgorithmType;
@@ -191,14 +202,12 @@ public class SettingController extends BaseController implements Initializable {
 				System.out.println("initListView -> " + currentIndex + "  size = " + listViewData_proj.size());
 				if (currentIndex >= 0 && currentIndex < listViewData_proj.size()) {
 					currentProject = projectListData.get(currentIndex);
-					if(currentProject.getSettings() == null){
-						System.out.println("无setting");
-					}
-					else System.out.println("无setting 有");
+//					if(currentProject.getSettings() == null){
+//						System.out.println("无setting");
+//					}
+//					else System.out.println("无setting 有");
 					setSettingViews(currentProject.getSettings(), false);
-					System.out.println("出来");
 				} else {
-					System.out.println("错误");
 					setting_pane.setVisible(false);
 				}
 			}
@@ -227,6 +236,10 @@ public class SettingController extends BaseController implements Initializable {
 					settingDialogController.setCallBack(new application.control.SettingsDialogController.CallBack() {
 						@Override
 						public void onReturn(SettingsBean settings) {
+							if(AlgorithmType == 0){
+								settings.setAlgorithmType(0);
+							}
+							else settings.setAlgorithmType(1);
 							refreshProjectListView();
 							refreshSettingListView(settings);
 							if (currentProject != null) {
@@ -276,13 +289,16 @@ public class SettingController extends BaseController implements Initializable {
 		} else {
 			checkBox_SaveMiddle.setSelected(settings.isSaveMiddle());
 			checkBox_preCheck.setSelected(settings.isPreCheck());
-			checkBox_ChangeAlgorithm.setSelected(settings.isChangeAlgorithm());
-			System.out.println("checkBox_changealgorithm = " + checkBox_ChangeAlgorithm.isSelected());
 			textArea_width.setText(settings.getNetWidth());
 			textArea_hight.setText(settings.getNetHeight());
 			textArea_gsd.setText(settings.getGsd());
 			textArea_cameraSize.setText(settings.getCameraSize());
 			textArea_flyHeight.setText(settings.getFlyHeight());
+			if(settings.getAlgorithmType() == 0){
+				groupAlgorithm.selectToggle(radioButton_algorithmWay1);
+			} else {
+				groupAlgorithm.selectToggle(radioButton_algorithmWay2);
+			}
 			if (settings.getPreCheckWay() == 0) {
 				group.selectToggle(radioButton_way1);
 			} else {
@@ -294,13 +310,14 @@ public class SettingController extends BaseController implements Initializable {
 	private void clearSettingViews(boolean showName) {
 		checkBox_SaveMiddle.setSelected(false);
 		checkBox_preCheck.setSelected(false);
-		checkBox_ChangeAlgorithm.setSelected(false);
+//		checkBox_ChangeAlgorithm.setSelected(false);
 		textArea_width.setText("");
 		textArea_hight.setText("");
 		textArea_gsd.setText("");
 		textArea_cameraSize.setText("");
 		textArea_flyHeight.setText("");
 		group.selectToggle(radioButton_way1);
+		groupAlgorithm.selectToggle(radioButton_algorithmWay2);
 	}
 
 	private void initTextField() {
@@ -312,6 +329,7 @@ public class SettingController extends BaseController implements Initializable {
 		radioButton_way1.setUserData(0);
 		radioButton_way2.setToggleGroup(group);
 		radioButton_way2.setUserData(1);
+
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -322,6 +340,44 @@ public class SettingController extends BaseController implements Initializable {
 				if ((int) group.getSelectedToggle().getUserData() == 1) {
 					hbox_way1.setDisable(true);
 					hbox_way2.setDisable(false);
+				}
+			}
+		});
+		groupAlgorithm = new ToggleGroup();
+		radioButton_algorithmWay1.setToggleGroup(groupAlgorithm);
+		radioButton_algorithmWay1.setUserData(0);
+		radioButton_algorithmWay2.setToggleGroup(groupAlgorithm);
+		radioButton_algorithmWay2.setUserData(1);
+
+		//添加选择钩，选择不同算法，通过此选择不同的算法，并通过单选按钮组groupAlgorithm下的hbox_algorithmWay1和hbox_algorithmWay2进行参数传递
+		groupAlgorithm.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@Override
+			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+				if((int) groupAlgorithm.getSelectedToggle().getUserData() == 0){
+					hbox_algorithmWay1.setDisable(false);
+					hbox_algorithmWay2.setDisable(true);
+
+					Vbox_prechecks.setDisable(true);
+					checkBox_preCheck.setDisable(true);
+					setting_right_pane.setDisable(true);
+					HBox_image_grid.setDisable(false);
+					checkBox_SaveMiddle.setDisable(true);
+//					button_save.setDisable(true);
+					button_help.setDisable(true);
+					AlgorithmType = 0;//设置后，则不使用默认算法，使用不带参数算法
+				}
+				if((int) groupAlgorithm.getSelectedToggle().getUserData() == 1){
+					hbox_algorithmWay1.setDisable(true);
+					hbox_algorithmWay2.setDisable(false);
+
+					Vbox_prechecks.setDisable(false);
+					checkBox_preCheck.setDisable(false);
+					setting_right_pane.setDisable(false);
+					HBox_image_grid.setDisable(false);
+					checkBox_SaveMiddle.setDisable(false);
+//					button_save.setDisable(false);
+					button_help.setDisable(false);
+					AlgorithmType = 1;//取消勾选后，再设置回默认不带参数算法
 				}
 			}
 		});
@@ -344,31 +400,6 @@ public class SettingController extends BaseController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (newValue) {
 				} else {
-				}
-			}
-		});
-		//添加选择钩，选择不同算法，通过此选择不同的算法，并通过AlgorithmType参数传递
-		checkBox_ChangeAlgorithm.selectedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if (newValue) {
-					Vbox_prechecks.setDisable(true);
-					checkBox_preCheck.setDisable(true);
-					setting_right_pane.setDisable(true);
-					HBox_image_grid.setDisable(true);
-					checkBox_SaveMiddle.setDisable(true);
-//					button_save.setDisable(true);
-					button_help.setDisable(true);
-					AlgorithmType = 1;//设置后，则不使用默认算法，使用不带参数算法
-				} else {
-					Vbox_prechecks.setDisable(false);
-					checkBox_preCheck.setDisable(false);
-					setting_right_pane.setDisable(false);
-					HBox_image_grid.setDisable(false);
-					checkBox_SaveMiddle.setDisable(false);
-//					button_save.setDisable(false);
-					button_help.setDisable(false);
-					AlgorithmType = 0;//取消勾选后，再设置回默认不带参数算法
 				}
 			}
 		});
@@ -534,11 +565,13 @@ public class SettingController extends BaseController implements Initializable {
 	 */
 	private SettingsBean checkAndSave() {
 		SettingsBean bean = null;
-		if(checkBox_ChangeAlgorithm.isSelected()){
+
+		if((int) groupAlgorithm.getSelectedToggle().getUserData() == 0){
 			bean = new SettingsBean();
-			bean.setAlgorithmType(1);
+			bean.setAlgorithmType(0);
 			return bean;
 		}
+
 		if (StrUtil.isEmpty(textArea_width.getText()) || StrUtil.isEmpty(textArea_hight.getText())) {
 			ToastUtil.toast(ResUtil.gs("setting_net_error"));
 			return bean;
@@ -572,10 +605,12 @@ public class SettingController extends BaseController implements Initializable {
 		bean.setNetHeight(textArea_hight.getValue() + "");
 		bean.setPreCheck(checkBox_preCheck.isSelected());
 		bean.setPreCheckWay((int) group.getSelectedToggle().getUserData());
+		bean.setAlgorithmType(0);
 		bean.setGsd(textArea_gsd.getValue() + "");
 		bean.setFlyHeight(textArea_flyHeight.getValue() + "");
 		bean.setCameraSize(textArea_cameraSize.getValue() + "");
 		bean.setSettingType(1);
+		bean.setAlgorithmType(1);
 		return bean;
 	}
 
@@ -584,9 +619,6 @@ public class SettingController extends BaseController implements Initializable {
 		boolean checkFinalData = checkFinalData();
 		if (checkFinalData) {
 			FinalDataBean finalDataBean = new FinalDataBean(projectListData);
-			if(finalDataBean.getSettings() == null){
-				System.out.println("setting1");
-			}
 
 //			if(checkBox_ChangeAlgorithm.isSelected()){
 //				System.out.println("选择");
@@ -627,11 +659,7 @@ public class SettingController extends BaseController implements Initializable {
 				ToastUtil.toast(ResUtil.gs("project") + project.getProjectName() + ResUtil.gs("setting_has_no_set"));
 				break;
 			}
-//			if(AlgorithmType == 1){
-//				project.getSettings().setAlgorithmType(getAlgorithmType());
-//			}
 		}
-//		System.out.println("执行完checkDataSetting");
 		return isOk;
 	}
 }
