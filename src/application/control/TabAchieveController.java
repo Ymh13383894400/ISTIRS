@@ -185,7 +185,7 @@ public class TabAchieveController implements Initializable {
 //						+ "\\Result\\" + name_dir + "-result\\" + name_dir + "-[ISTIRS].png";
 				path = System.getProperty("user.dir") + "\\input-42-data\\" + "0_results\\"
 						+ name_dir + "-result\\" + "SAP-GSP-plus.png";
-				System.out.println("000000000000000000: "+ path);
+				System.out.println("保存图片路径为："+ path);
 				if (!SysUtil.exeOpenFile(path)) {
 					ToastUtil.toast(ResUtil.gs("open_image_error"));
 				}

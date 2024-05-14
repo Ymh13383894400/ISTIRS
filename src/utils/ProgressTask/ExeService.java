@@ -23,10 +23,16 @@ public class ExeService extends Service<String>
 			protected String call() throws Exception
 			{
 				String path = System.getProperty("user.dir");
-//		    	String path_Exe = path + "\\ExeProcedure\\ImageStitching.exe";//exe文件的结果路径
-		    	String path_Exe = path + "\\ExeProcedureNISwGSP\\NISwGSP.exe";//exe文件的结果路径
-//				String lastLine = ExeProcedureUtil.execute(path_Exe, FinalDataBean.para_Exe, listener);//参数
-		    	String lastLine = ExeProcedureUtil.execute_NISwGSP(path_Exe, FinalDataBean.para_Exe, listener);//参数
+		    	String path_Exe;
+				String lastLine;
+				if(FinalDataBean.para_Exe_type == 1) {
+					path_Exe = path + "\\ExeProcedure\\ImageStitching.exe";//exe文件的结果路径
+					lastLine = ExeProcedureUtil.execute(path_Exe, FinalDataBean.para_Exe, listener);//参数
+				}
+				else {
+					path_Exe = path + "\\ExeProcedureNISwGSP\\NISwGSP.exe";//exe文件的结果路径
+					lastLine = ExeProcedureUtil.execute_NISwGSP(path_Exe, FinalDataBean.para_Exe, listener);//参数
+				}
 				return	lastLine;
 			}
 		};
@@ -36,7 +42,6 @@ public class ExeService extends Service<String>
 	@Override
 	protected void succeeded()
 	{
-//		System.out.println("qqqqqqqqqqqqqqqqqqq");
     	super.succeeded();
     	String result = getValue();
 

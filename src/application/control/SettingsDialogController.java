@@ -167,7 +167,6 @@ public class SettingsDialogController implements Initializable {
 
 		boolean isDone = checkAndNew();
 		if (isDone) {
-
 			if (type == 2) {
 				checkChangeProjectData();
 			}

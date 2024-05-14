@@ -65,7 +65,7 @@ public class ExeProcedureUtil
                 bos.write((lineStr + "\n").getBytes("UTF-8"));
                 oldString = lineStr;
                 final String newStr = lineStr;
-                System.out.println("进入run中，newStr = "+ newStr + " oldStr = " + oldString + " lineStr = " + lineStr);
+//                System.out.println("进入run中，newStr = "+ newStr + " oldStr = " + oldString + " lineStr = " + lineStr);
 				  Platform.runLater(new Runnable() {
 					  @Override public void run() { //更新JavaFX的主线程的代码放在此处
 					 		listener.update("\n" + newStr);
@@ -109,7 +109,7 @@ public class ExeProcedureUtil
 		String path = para.substring(1,j-1);
 		System.out.println("---------------:" + para_Exe + " " + path);
 		String dir_currentproject = para.substring(i + 1);
-		System.out.println("\n------------------\n输出在cmd的内容为：" + path_Exe + " " + para_Exe);
+//		System.out.println("\n------------------\n输出在cmd的内容为：" + path_Exe + " " + para_Exe);
 
 
 
@@ -149,8 +149,8 @@ public class ExeProcedureUtil
 			process = runtime.exec(cmds);
 			// 写入数据到子进程的标准输入中
 			stdin = process.getOutputStream();
-		   stdin.write('\n');
-		   stdin.flush();
+		   	stdin.write('\n');
+		   	stdin.flush();
 			process.waitFor();
 
 			System.out.println("运行");
@@ -169,13 +169,12 @@ public class ExeProcedureUtil
 				oldString = lineStr;
 				final String newStr = lineStr;
 
-				System.out.println("进入run中，newStr = "+ newStr + " oldStr = " + oldString + " lineStr = " + lineStr);
 				Platform.runLater(new Runnable() {
 					@Override public void run() { //更新JavaFX的主线程的代码放在此处
 						listener.update("\n" + newStr);
 					}
 				});
-				System.out.println("lineStr = " + lineStr + " oldStr = " + oldString + " newStr = " + newStr);
+//				System.out.println("lineStr = " + lineStr + " oldStr = " + oldString + " newStr = " + newStr);
 			}
 			System.out.println("----------------无异常执行完exe文件------------------最后的lineStr = " + lineStr);
 			bos.flush();
@@ -217,8 +216,8 @@ public class ExeProcedureUtil
 	public static boolean closeExe()
 	{
 		//修改进程关闭
-//		String command = "taskkill /f /im ImageStitching.exe";
-		String command = "taskkill /f /im NISwGSP.exe";
+		String command1 = "taskkill /f /im ImageStitching.exe";
+		String command2 = "taskkill /f /im NISwGSP.exe";
 		process.destroyForcibly();
 		try
 		{
@@ -228,7 +227,8 @@ public class ExeProcedureUtil
 			System.out.println("未关闭");
 			try
 			{
-				Runtime.getRuntime().exec(command);
+				Runtime.getRuntime().exec(command1);
+				Runtime.getRuntime().exec(command2);
 				Thread.sleep(3000);
 			} catch (Exception event)
 			{

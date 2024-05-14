@@ -42,28 +42,69 @@
 				<center>
 					<BorderPane>
 						<top>
-							<VBox spacing="5.0" alignment="TOP_LEFT" fx:id="setting_top_pane"
+							<VBox spacing="4.0" alignment="TOP_LEFT" fx:id="setting_top_pane"
 								  style="-fx-background-color: #fff; -fx-border-width: 1; -fx-border-color: #f1f1f1;">
 								<Label fx:id="label_project_name"
-									   style="-fx-text-fill: #4f4f4f;-fx-font-size: 20.0">
+									   style="-fx-text-fill: #4f4f4f;-fx-font-size: 15.0">
 									<VBox.margin>
-										<Insets left="10.0" top="10.0" bottom="10.0"/>
+										<Insets left="10.0" top="10.0" bottom="4.0"/>
 									</VBox.margin>
 								</Label>
-								<!--		添加更改算法的选择		-->
-								<JFXCheckBox fx:id="checkBox_ChangeAlgorithm" selected="false" alignment="TOP_LEFT"
-											 text="%setting_change_algorithm">
+								<Label text="%setting_title_algorithm" style="-fx-font-size: 15.0">
 									<styleClass>
-										<String fx:value="custom-jfx-check-box" />
+										<String fx:value="label-level-setting-normal" />
 									</styleClass>
 									<VBox.margin>
-										<Insets left="10.0" top="10.0" bottom="10.0"/>
+										<Insets left="10.0" top="3.0" bottom="10.0"/>
 									</VBox.margin>
-								</JFXCheckBox>
+								</Label>
 
-								<BorderPane.margin>
+								<HBox fx:id="hbox_algorithmCheck1" alignment="CENTER_LEFT"
+									  prefHeight="10.0" spacing="4.0">
+									<children>
+										<JFXRadioButton text="" selected="true"
+														selectedColor="#FFA500" fx:id="radioButton_algorithmWay1"
+														style="-fx-text-fill: #4f4f4f; -fx-font-size: 14;-fx-spacing:4">
+										</JFXRadioButton>
+										<HBox spacing="2.0" fx:id="hbox_algorithmWay1"
+											  alignment="CENTER_LEFT">
+											<Label text="%setting_algorithmSAPGSP"  >
+												<styleClass>
+													<String fx:value="label-level-setting-normal" />
+												</styleClass>
+											</Label>
+										</HBox>
+									</children>
+									<VBox.margin>
+										<Insets left="10.0" />
+									</VBox.margin>
+								</HBox>
+
+								<HBox fx:id="hbox_algorithmCheck2" alignment="CENTER_LEFT"
+									  prefHeight="10.0" spacing="4.0">
+									<children>
+										<JFXRadioButton text="" selectedColor="#FFA500"
+														fx:id="radioButton_algorithmWay2"
+														style="-fx-text-fill: #4f4f4f; -fx-font-size: 14;-fx-spacing:4">
+										</JFXRadioButton>
+										<HBox spacing="6.0" fx:id="hbox_algorithmWay2" disable="true"
+											  alignment="CENTER_LEFT">
+											<Label text="%setting_algorithmGSP">
+												<styleClass>
+													<String fx:value="label-level-setting-normal" />
+												</styleClass>
+											</Label>
+										</HBox>
+									</children>
+									<VBox.margin>
+										<Insets left="10.0" bottom="10.0"/>
+									</VBox.margin>
+								</HBox>
+
+								<VBox.margin>
 									<Insets left="5.0" top="5.0"/>
-								</BorderPane.margin>
+								</VBox.margin>
+
 							</VBox>
 
 						</top>
@@ -71,17 +112,14 @@
 							<BorderPane>
 								<center>
 									<VBox spacing="12.0" fx:id="setting_pane" visible="false"
-										  style="-fx-background-color: #fff; -fx-border-width: 2; -fx-border-color: #fafafa;-fx-padding: 14;"
+										  style="-fx-background-color: #fff; -fx-border-width: 2; -fx-border-color: #fafafa;-fx-padding: 10;"
 										  BorderPane.alignment="CENTER">
 										<children>
-											<Label text="%setting_title" style="-fx-font-size: 18.0">
+											<Label text="%setting_title_parameter" style="-fx-font-size: 15.0">
 												<styleClass>
 													<String fx:value="label-level-setting-normal" />
 												</styleClass>
 
-<!--												<HBox.margin>-->
-<!--													<Insets top="3.5" />-->
-<!--												</HBox.margin>-->
 											</Label>
 											<HBox spacing="14.0" fx:id="HBox_image_grid">
 												<children>
@@ -130,14 +168,17 @@
 													</VBox>
 												</children>
 											</HBox>
-											<VBox spacing="15">
+											<VBox spacing="3.0">
 												<HBox alignment="CENTER_LEFT"
-													  prefHeight="60.0" spacing="5.0">
+													  prefHeight="60.0" spacing="3.0">
 													<JFXCheckBox fx:id="checkBox_preCheck" selected="false"
 																 text="%setting_pre_check">
 														<styleClass>
 															<String fx:value="custom-jfx-check-box" />
 														</styleClass>
+														<VBox.margin>
+															<Insets left="5.0" top="5.0"/>
+														</VBox.margin>
 													</JFXCheckBox>
 													<JFXButton fx:id="button_help" buttonType="RAISED" onAction="#onClickHelpCamera">
 														<graphic>
@@ -152,7 +193,7 @@
 												</HBox>
 												<VBox spacing="5" fx:id="Vbox_prechecks" disable="true">
 													<HBox fx:id="hbox_preCheckDetail1" alignment="CENTER_LEFT"
-														  prefHeight="10.0" spacing="4.0">
+														  prefHeight="10.0" spacing="3.0">
 														<children>
 															<JFXRadioButton text="" selected="true"
 																			selectedColor="#FFA500" fx:id="radioButton_way1"
@@ -190,13 +231,13 @@
 													</HBox>
 
 													<HBox fx:id="hbox_preCheckDetail2" alignment="CENTER_LEFT"
-														  prefHeight="10.0" spacing="4.0">
+														  prefHeight="10.0" spacing="3.0">
 														<children>
 															<JFXRadioButton text="" selectedColor="#FFA500"
 																			fx:id="radioButton_way2"
-																			style="-fx-text-fill: #4f4f4f; -fx-font-size: 14;-fx-spacing:4">
+																			style="-fx-text-fill: #4f4f4f; -fx-font-size: 14;-fx-spacing:3">
 															</JFXRadioButton>
-															<HBox spacing="6.0" fx:id="hbox_way2" disable="true"
+															<HBox spacing="5.0" fx:id="hbox_way2" disable="true"
 																  alignment="CENTER_LEFT">
 																<Label text="%setting_gsd">
 																	<styleClass>
@@ -224,14 +265,22 @@
 												</styleClass>
 											</JFXCheckBox>
 
-											<JFXButton fx:id="button_save" onAction="#onSaveSetting" text="%setting_save" >
-												<styleClass>
-													<String fx:value="btn-level-normal" />
-												</styleClass>
-												<VBox.margin>
-													<Insets top="10"></Insets>
-												</VBox.margin>
-											</JFXButton>
+
+											<HBox spacing="5.0" alignment="CENTER_LEFT">
+												<JFXButton fx:id="button_save" onAction="#onSaveSetting" text="%setting_save" >
+													<styleClass>
+														<String fx:value="btn-level-normal" />
+													</styleClass>
+													<VBox.margin>
+														<Insets top="10"></Insets>
+													</VBox.margin>
+												</JFXButton>
+												<Label text="%setting_save_tip" >
+													<styleClass>
+														<String fx:value="label-level-setting-normal" />
+													</styleClass>
+												</Label>
+											</HBox>
 
 										</children>
 										<BorderPane.margin>
@@ -240,7 +289,7 @@
 									</VBox>
 								</center>
 								<right>
-									<VBox spacing="5.0" alignment="CENTER" fx:id="setting_right_pane"
+									<VBox spacing="4.0" alignment="CENTER" fx:id="setting_right_pane"
 										  style="-fx-background-color: #fff; -fx-border-width: 1; -fx-border-color: #f1f1f1;">
 										<JFXButton onAction="#onAddSetting" text="%settings_add">
 											<styleClass>

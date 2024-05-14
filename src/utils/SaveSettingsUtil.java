@@ -93,6 +93,7 @@ public class SaveSettingsUtil {
 						item.setPreCheck(bean.isPreCheck());
 						item.setPreCheckWay(bean.getPreCheckWay());
 						item.setSaveMiddle(bean.isSaveMiddle());
+						item.setAlgorithmType(bean.getAlgorithmType());
 						break;
 					}
 				}

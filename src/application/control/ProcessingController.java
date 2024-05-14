@@ -85,7 +85,9 @@ public class ProcessingController extends BaseController implements Initializabl
 	 */
 	public void startExec(FinalDataBean finalData)
 	{
+
 		service = new ExeService(this.listener);
+//		listener.
 		 //异常监听 监听现在状态是否有异常并打印
         service.exceptionProperty().addListener(new ChangeListener<Throwable>() {
             @Override
@@ -93,7 +95,6 @@ public class ProcessingController extends BaseController implements Initializabl
                 listener.updateFailBox(newValue.toString());
             }
         });
-		System.out.println("nextrun0 = " + finalData.getProjectListData().size());
         tabRunningController.addServiceToList(finalData);
         updateParam();
         nextRun();
@@ -195,14 +196,16 @@ public class ProcessingController extends BaseController implements Initializabl
  			String time = df.format(next.getLastRuntime());
  			String path =System.getProperty("user.home")+ConstRes.SOFT_PATH;
  			dbRecord.setResultPath(path + "\\logs\\" + next.getProjectName() +"_"+ next.getId() + "\\" + time);
-			 if(next.getSettings().getAlgorithmType() == 1) {
+			 if(next.getSettings().getAlgorithmType() == 0) {
 				 FinalDataBean.para_Exe = next.getParam1() + "%" + next.getProjectName() + "_" + next.getId() + "\\" + time;
+				 FinalDataBean.para_Exe_type = 0;
 				 System.out.println("输出保存路径:"+next.getParam1() + "%" + next.getProjectName() + "_" + next.getId() + "\\" + time);
 			 }
-			 else
+			 else{
 				 FinalDataBean.para_Exe = next.getLabelFile() + next.toSettingParameter() + next.getParam() + "%" + next.getProjectName() +"_"+ next.getId() + "\\" + time;
-
-
+				 FinalDataBean.para_Exe_type = 1;
+				 System.out.println("输出保存路径:" + FinalDataBean.para_Exe);
+			 }
 			System.out.println(FinalDataBean.para_Exe);
  			currentProject.setText(next.getProjectName() + " . . .");
  		}
@@ -212,19 +215,15 @@ public class ProcessingController extends BaseController implements Initializabl
 	 */
 	public void nextRun()
 	{
-		System.out.println("nextrun");
 		if(!tabRunningController.getList_running().isEmpty())
 		{
-			System.out.println("nextrun1");
 			tabRunningController.toRunning();
 			service.reset();
 			service.start();
 			listener.updateStart();
 		}else {
-			System.out.println("nextrun2");
 			listener.updateFinish();
 		}
-		System.out.println("nextrun3");
 	}
 	
 	/*
